@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Historia de Amor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 50%, #f67280 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow-y: auto;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1.2s ease-out;
+            margin: 20px auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #c06c84;
+            font-size: 3em;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .hearts {
+            font-size: 2em;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .subtitle {
+            color: #666;
+            font-style: italic;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .chapter {
+            margin: 35px 0;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .chapter:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .chapter:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+
+        .chapter:nth-child(4) {
+            animation-delay: 0.7s;
+        }
+
+        .chapter:nth-child(5) {
+            animation-delay: 0.9s;
+        }
+
+        .chapter:nth-child(6) {
+            animation-delay: 1.1s;
+        }
+
+        .chapter:nth-child(7) {
+            animation-delay: 1.3s;
+        }
+
+        .chapter:nth-child(8) {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            color: white;
+            padding: 18px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .chapter-header:hover {
+            transform: translateX(8px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.5);
+        }
+
+        .chapter-header h2 {
+            font-size: 1.5em;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 1.3em;
+        }
+
+        .arrow {
+            font-size: 1.5em;
+            transition: transform 0.4s ease;
+        }
+
+        .arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .chapter-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease, padding 0.6s ease;
+            padding: 0 25px;
+            background: linear-gradient(to bottom, #fff5f8, white);
+            border-radius: 0 0 15px 15px;
+        }
+
+        .chapter-content.open {
+            max-height: 5000px;
+            padding: 30px 25px;
+            border: 2px solid #ffe0e9;
+            border-top: none;
+        }
+
+        .chapter-content p {
+            line-height: 2;
+            color: #444;
+            margin: 18px 0;
+            text-align: justify;
+            font-size: 1.05em;
+        }
+
+        .memory-box {
+            background: linear-gradient(135deg, #fff5f8 0%, #ffe0e9 100%);
+            border-left: 5px solid #ff6b9d;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .memory-box:hover {
+            transform: translateX(8px);
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.2);
+        }
+
+        .memory-box::before {
+            content: '💭';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 2em;
+        }
+
+        .memory-box strong {
+            color: #c06c84;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: #ff6b9d;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff6b9d, transparent);
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+
+        .photo-placeholder {
+            background: linear-gradient(135deg, #ffe0e9 0%, #ffd1dc 100%);
+            border: 3px dashed #ff6b9d;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            color: #c06c84;
+            font-style: italic;
+        }
+
+        .love-note {
+            background: white;
+            border: 2px solid #ff6b9d;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            font-style: italic;
+            position: relative;
+        }
+
+        .love-note::before {
+            content: '❤️';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            background: white;
+            padding: 0 10px;
+        }
+
+        .map-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+            margin: 10px 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .map-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.5);
+        }
+
+        .map-button:active {
+            transform: translateY(-1px);
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                align-items: flex-start;
+            }
+
+            .container {
+                padding: 30px 20px;
+                margin: 10px auto;
+                border-radius: 20px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .chapter-header h2 {
+                font-size: 1.2em;
+            }
+
+            .chapter-content.open {
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="hearts">💕</div>
+            <h1>Nuestra Historia</h1>
+            <p class="subtitle">El comienzo de algo hermoso</p>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2><span class="icon">✨</span> La primera vez que nos vimos</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="chapter-content">
+                <span class="date-badge">📅 21/01/2025</span>
+                <p>Donde nunca pense que conoceria a alguien como vos, un viaje de bitajon. Llegamos al hotel, nos
+                    dieron las piezas y
+                    nos fuimos a desayunar. Los otros dias, aunque nos vimos y hablamos poco, ya habias comenzado a
+                    llamarme la atencion,
+                    aunque pense "deja de flayar Ariel que mierda va a pasar aca".
+                </p>
+                <div class="divider"></div>
+                <div class="memory-box">
+                    <strong>La primera impresión</strong>
+                    <p>Todo el tiempo demasiados nervios (y no, no solo por el curso), cuando me animaba a soltar
+                        palabras salian dos o tres
+                        de mi boca y era todo, nunca pense que pudiera llegar a pasar algo. Aunque siempre dije que me
+                        encataria estar con
+                        alguien de la mis, pense que ahi habia terminado todo, en un hola y chau.
+                    </p>
+                </div>
+
+                <div class="button-container">
+                    <a href="https://www.google.com/maps/search/?api=1&query=-34.4283419,-58.5845781" target="_blank"
+                        class="map-button">
+                        📍 Ver dónde nos conocimos
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2><span class="icon">💍</span> El casamiento</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="chapter-content">
+                <span class="date-badge">📅 07/09/2025 </span>
+                <p>El dia del casamiento de Leeon habia empezado muy bien: la ceremonia, la comida, los tragos con
+                    amigos, los bailes, todo.
+                    Seguimos avanzando en la noche y como quien no quiere la cosa te vi. Con nervios (a eso le
+                    ayudo la parte de los tragos)
+                    me acerque hasta la parte de donde estabas vos, hablando con todos los de Córdoba y se entablo una
+                    gran charla entre todos.
+                </p>
+
+                <div class="memory-box">
+                    <strong>El mejor momento del día</strong>
+                    <p>Cuando empezamos a hablar todos, vi que te sentaste al lado mio, y me empezaste a hacer mimos en
+                        el pelo. Me puse demasiado
+                        nervioso, algo que habia imaginado en algun momento estaba pasando, estaba como en un sueño.
+                        Seguimos charlando y, casi como
+                        orquestado, terminamos quedando solos y se cumplio. Con alguna molestia de por medio de algunas
+                        personas, pero estaba realmente
+                        pasando. Y aunque te de verguenza, es algo que no me voy a olvidar.
+                    </p>
+                </div>
+
+                <div class="button-container">
+                    <a href="https://www.google.com/maps/search/?api=1&query=-26.801455, -65.261586" target="_blank"
+                        class="map-button">
+                        📍 Ver dónde nos reencontramos
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2><span class="icon">🏠</span> Tu primera visita</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="chapter-content">
+                <span class="date-badge">📅 27/09/2025 </span>
+                <p>Despues del casamiento nos empezamos a hablar todos los dias, empezo realmente la historia. Viniste
+                    ese fin de semana a tucuman
+                    para dar peula y a un bat, pero aun asi te hiciste el tiempo para verme a mi. Sabes que todavia
+                    tengo las entradas del cine, y planeo tenerlas
+                    hasta que la tinta deje de decir el nombre de la pelicula que vimos. Estaba demasiado nervioso, en
+                    el almuerzo no salieron las cosas
+                    como pensé y me sentia medio tonto, pero los nervios fueron bajando cada vez más.
+                </p>
+                <div class="memory-box">
+                    <strong>Lo que sentí</strong>
+                    <p>Me encanto que hayas tenido tiempo para verme, lo deseaba mucho. Haber podido salir solos, tener
+                        un almuerzo, una pelicula y MERENDASTE
+                        CON MI FAMILIA. En ese momento empece a decir "aca me la tengo que jugar", con esta persona si
+                        quiero estar.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2><span class="icon">✈️</span> Mi primer viaje</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="chapter-content">
+                <span class="date-badge">📅 24/10/2025 </span>
+                <p>Si te soy sincero, por dias pensé "que hago viajando a otra provincia para ver a una chica", nunca me
+                    habia visto en una relación a distancia
+                    pero cada vez que se me podia llegar a venir ese pensamiento a la cabeza se me venia con más fuerza
+                    el decir: la pase demasiado bien cuando
+                    ella vino, y sumandole a ese pensamiento estaba el haber dicho acá me la tengo que jugar. Saqué los
+                    pasajes con nervios pensando como iba a salir
+                    todo, y una vez que me llego la confirmación de que ya estaban comprados, algo me agito el corazón.
+                </p>
+                <div class="memory-box">
+                    <strong>El reencuentro</strong>
+                    <p>Cuando te vi que me buscaste de la terminal se me dibujo una sonrisa de oreja a oreja, de nuevo
+                        pensando que hago aca. Me recibiste, me diste un
+                        abrazo, y se sintio tan bien y calido que dije que suerte que vine. Aún en tu auto no podia
+                        creer lo que estaba pasando, habia viajado ocho horas
+                        para ver a la chica que me gustaba, y literalmente empezo a calmarse la vida. Me recibieron
+                        todos demasiado bien, me senti uno mas en la casa y
+                        me dieron ganas de que ese sea mi lugar cuando salga de Tucuman.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2><span class="icon">🎂</span> Tu cumple</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="chapter-content">
+                <span class="date-badge">📅 09/11/2025 </span>
+                <p>Me acuerdo que estuve varios dias tratando de arreglarme para poder viajar, acomodando fechas, todo.
+                    Un dia dije ya está compro
+                    el pasaje, y me acuerdo que cuando lo compre vos estabas en un cumpleaños, y te mande la foto de los
+                    pasajes y me dijiste que
+                    casi te largas a llorar. La verdad que siento que era lo correcto hacer, aunque nos habiamos visto
+                    hace poco, tenia que estar
+                    en tu cumpleaños. Es una fecha importante para vos y me habias dicho cuanto querias que este.
+                </p>
+
+                <div class="memory-box">
+                    <strong>La celebración</strong>
+                    <p>Dejando de lado (no porque no sea importante) el viaje y todo lo que hicimos en los dias que
+                        estuve en Córdoba, la noche que
+                        celebraste tu cumpleaños con tus amigos fue especial para mi tambien. No solo por poder estar en
+                        tu cumpleaños cerca tuyo
+                        sino tambien porque me presentaste a tus amigos, a tu circulo cerrado, y a los que queres. Si,
+                        estaba nervioso, pero siento
+                        tambien que en cierto modo me hizo quererte mas todavia. Mostrarme ante la gente que queres, y
+                        que ellos sepan quien soy
+                        me demostro que vos tambien me querias, y que podiamos hacer funcionar cualquier cosa.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2><span class="icon">💍</span> La pregunta</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="chapter-content">
+                <span class="date-badge">📅 07/12/2025 </span>
+                <p>Un día terminaste viniendo a Tucuman para verme a mi, te busque de la terminal, vinimos a mi casa y
+                    despues del almuerzo dormimos una
+                    linda siesta juntos. Recuerdo que estabamos haciendo planes para la noche, pero mi mamá nos dice de
+                    ir a comer un asado. Fuimos, charlamos,
+                    me cargaron, tomamos, y despues volvimos a mi casa a fumar una nargui y tomar un poco mas jugando al
+                    juego de los preguntas.
+                    Despues de pensarlo durante toda la noche me anime y te entregue la carta, no queria verte mientras
+                    la leias, y cuando terminaste nos vimos,
+                    nos abrazamos y al fin solte la pregunta mas importante hasta ahora... Fue hace poco, apenas casi un
+                    mes, pero siento que nos conocemos un
+                    monton más de lo que dos personas se conocen en tan poco tiempo.
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2><span class="icon">🌟</span> Nosotros</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="chapter-content">
+                <p>En este pedacito quiero contarte un poco como me siento hoy. No se si decirle afortunado, pero me
+                    siento feliz de haber podido encontrar
+                    a alguien que me entienda, me acompañe, me calme y me valore. Que sepa que cosas decir, y aunque
+                    me hagas burlas muchas veces me hiciste
+                    entender que es con amor. Quiero que sepas que me encanta como estamos, como me haces sentir y
+                    que siempre estamos el uno para el otro.
+                </p>
+                <div class="memory-box">
+                    <strong>Lo que siento cuando estoy contigo</strong>
+                    <p>Aunque no nos podamos ver todas las semanas, en este caso por meses. Cuando te veo cara a
+                        cara, al frente mio, todas las cosas que hay
+                        en mi cabeza se calman. Me devolves a tierra. Me haces sentir 10 millones de emociones al
+                        mismo tiempo que literal ya no puedo encontrar
+                        las palabras para expresarlas. En resumen, siento que me completas en lo que no tengo en el
+                        momento.
+                    </p>
+                </div>
+                <div class="divider"></div>
+                <div class="memory-box">
+                    <strong>Lo que más admiro de ti</strong>
+                    <p>La manera en la que afrontas las cosas, tu perseverancia y la pasión que le otorgas a las
+                        cosas que haces. Ya sea facultad, mis, tnua,
+                        cualquier cosa. Siempre buscas esa perfeccion imposible de alcanzar, pero aun asi llegas a
+                        hacerlo. Admiro la forma en la que podes
+                        transformar una epoca complicada del año en algo divertido, con aprendizaje y de donde todos
+                        los que trabajan con vos se llevan algo.
+                        Tambien dejame decirte que me encanta tu pasión a la tnua, es lo que mas admiro. Poder haber
+                        vivido esta ultima parte del año con vos
+                        donde viste hacerse madrijim a tus pollitos, y verte asi de orgullosa me demuestra la
+                        calidad de persona que sos, que quiere que todo
+                        salga bien y que se interesa por los demas
+                    </p>
+                </div>
+                <div class="love-note">
+                    <strong>Mi promesa para nuestro futuro</strong>
+                    <p>Se que hablar de un futuro por ahí es mucho, pero con futuro me refiero a cada dia que pase
+                        desde hoy. Prometo estar
+                        siempre para vos, en los puntos altos y sobre todo en los bajos. Cuando te sientas bien y
+                        mal. Estar pendiente de vos,
+                        cuidarte en todo lo que pueda, y aprender todos los dias a ser mejor para que estemos
+                        siempre de la mejor manera posible.
+                        En mi siempre vas a encontrar un lugar donde puedas hablar, desahogarte y hacer lo que
+                        quieras hacer. Te quiero, te amo y
+                        te admiro un monton
+                    </p>
+                </div>
+
+                <div class="divider"></div>
+                <p><strong>Por qué elegí compartir esta historia:</strong></p>
+                <p>Como no podemos vernos durante un tiempo, queria encontrar una forma distinta de demostrarte lo
+                    que siento. Es un regalo a la
+                    distancia para que, espero, se haga un poco más tranquilo el trayecto, y puedas entrar a verlo
+                    todas las veces que quieras o
+                    necesites. Para poder revivir lo que llevamos y puedas leer algunas cosas lindas tambien.
+                </p>
+                <div
+                    style="text-align: center; margin-top: 50px; padding: 30px; background: linear-gradient(135deg, #fff5f8 0%, #ffe0e9 100%); border-radius: 15px;">
+                    <p style="font-size: 1.4em; color: #c06c84; font-weight: bold; margin-bottom: 15px;">
+                        Gracias por ser mi compañera
+                    </p>
+                    <p style="font-size: 2.5em; margin: 20px 0;">
+                        💕
+                    </p>
+                    <p style="font-style: italic; color: #666; font-size: 1.1em;">
+                        Te amo hoy, mañana y siempre
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleChapter(header) {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('.arrow');
+
+            content.classList.toggle('open');
+            arrow.classList.toggle('open');
+        }
+    </script>
+</body>
+
+</html>
